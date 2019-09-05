@@ -23,6 +23,10 @@ var goTos = [
     {k: 'g u', p: '/admin/user.php'},
     // go to cohort management
     {k: 'g c', p: '/cohort/index.php'},
+    // go to role management
+    {k: 'g r', p: '/admin/roles/manage.php'},
+    // go to plugin management
+    {k: 'g p', p: '/admin/plugins.php'}
 ];
 
 goTos.forEach((item) => Mousetrap.bind(item.k, () => mousetrap_goto_rel(item.p) && false));
