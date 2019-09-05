@@ -32,29 +32,35 @@ define(["jquery", "./jquery.mousetrap"], function ($, Mousetrap) {
         {k: 'g p', p: '/admin/plugins.php'}
     ];
 
-    goTos.forEach(function (item) {
-        Mousetrap.bind(item.k, function () {
-            mousetrap_goto_rel(item.p);
-            return false;
-        });
-    });
+    return {
 
-    // switch role
-    Mousetrap.bind('s r', function () {
-        var role_to = $("#action-menu-1-menu a[data-title='switchroleto,moodle']");
-        var role_return = $("#action-menu-1-menu a[data-title='switchrolereturn,moodle']");
-        if (role_to.length > 0) {
-            mousetrap_goto_abs(role_to.attr('href'));
-        } else {
-            mousetrap_goto_abs(role_return.attr('href'));
+        init: function () {
+            goTos.forEach(function (item) {
+                Mousetrap.bind(item.k, function () {
+                    mousetrap_goto_rel(item.p);
+                    return false;
+                });
+            });
+
+            // switch role
+            Mousetrap.bind('s r', function () {
+                var role_to = $("#action-menu-1-menu a[data-title='switchroleto,moodle']");
+                var role_return = $("#action-menu-1-menu a[data-title='switchrolereturn,moodle']");
+                if (role_to.length > 0) {
+                    mousetrap_goto_abs(role_to.attr('href'));
+                } else {
+                    mousetrap_goto_abs(role_return.attr('href'));
+                }
+                return false;
+            });
+
+            // switch edit mode
+            Mousetrap.bind('s e', function () {
+                var btn = $('.coursecontrols .editingbutton').click();
+                mousetrap_goto_abs(btn.attr('href'));
+                return false;
+            });
         }
-        return false;
-    });
 
-    // switch edit mode
-    Mousetrap.bind('s e', function () {
-        var btn = $('.coursecontrols .editingbutton').click();
-        mousetrap_goto_abs(btn.attr('href'));
-        return false;
-    });
+    };
 });

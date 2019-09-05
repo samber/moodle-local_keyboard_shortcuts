@@ -25,6 +25,5 @@
 function local_keyboard_shortcuts_before_footer() {
     global $PAGE;
 
-    $PAGE->requires->js('/local/keyboard_shortcuts/js/jquery.mousetrap.min.js');
-    $PAGE->requires->js('/local/keyboard_shortcuts/js/shortcuts.js');
+    $PAGE->requires->js_add_amd('keyboard_shortcuts/shortcuts.js', 'init');
 }

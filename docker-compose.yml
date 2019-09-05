@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+
+  postgres:
+    image: postgres:11
+    environment:
+      - POSTGRES_DB=moodle
+      - POSTGRES_USER=moodle
+      - POSTGRES_PASSWORD=moodle
+
+  build:
+    image: moodlehq/moodle-workplace-plugin-ci:7.3
+    depends_on:
+      - postgres
+    volumes:
+      - ./:/plugin
+    working_dir: /plugin
+    command: ./build.sh
