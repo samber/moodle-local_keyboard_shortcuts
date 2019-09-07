@@ -25,5 +25,5 @@
 function local_keyboard_shortcuts_before_footer() {
     global $PAGE;
 
-    $PAGE->requires->js_add_amd('keyboard_shortcuts/shortcuts.js', 'init');
+    $PAGE->requires->js_call_amd('keyboard_shortcuts/shortcuts.js', 'init');
 }
