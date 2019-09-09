@@ -21,9 +21,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
-function local_keyboard_shortcuts_before_footer() {
+function local_keyboard_shortcuts_extend_navigation() {
     global $PAGE;
-
-    $PAGE->requires->js_call_amd('keyboard_shortcuts/shortcuts.js', 'init');
+    $PAGE->requires->js_call_amd('local_keyboard_shortcuts/shortcuts', 'init');
 }

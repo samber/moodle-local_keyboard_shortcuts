@@ -1,12 +1,27 @@
 
-define(["jquery", "./jquery.mousetrap"], function ($, Mousetrap) {
+define(["jquery", "local_keyboard_shortcuts/mousetrap"], function ($, Mousetrap) {
     "use strict";
 
-    function mousetrap_goto_rel(path) {
-        window.location.pathname = path;
-    }
-    function mousetrap_goto_abs(path) {
+    function mousetrap_goto(path) {
         window.location.href = path;
+    }
+
+    function get_query_params() {
+	return decodeURI(window.location.search)
+	    .replace('?', '')
+	    .split('&')
+	    .map(param => param.split('='))
+	    .reduce((values, [ key, value ]) => {
+		values[ key ] = value
+		return values
+	    }, {});
+    }
+    function to_query_params(obj) {
+	const str = Object.entries(obj)
+	      .filter((kv) => kv[0] != null && kv[1] != null)
+	      .map((kv) => kv[0] + "=" + kv[1])
+	      .join('&');
+	return "?" + encodeURI(str);
     }
 
     // goto
@@ -37,29 +52,41 @@ define(["jquery", "./jquery.mousetrap"], function ($, Mousetrap) {
         init: function () {
             goTos.forEach(function (item) {
                 Mousetrap.bind(item.k, function () {
-                    mousetrap_goto_rel(item.p);
+                    mousetrap_goto(item.p);
                     return false;
                 });
             });
 
             // switch role
             Mousetrap.bind('s r', function () {
-                var role_to = $("#action-menu-1-menu a[data-title='switchroleto,moodle']");
-                var role_return = $("#action-menu-1-menu a[data-title='switchrolereturn,moodle']");
-                if (role_to.length > 0) {
-                    mousetrap_goto_abs(role_to.attr('href'));
-                } else {
-                    mousetrap_goto_abs(role_return.attr('href'));
-                }
+		const returnurl = window.location.pathname + window.location.search;
+		const id = !!get_query_params()['id'] ? get_query_params()['id'] : "1";
+		const session = M.cfg.sesskey;
+
+		if ($('body.userswitchedrole').length == 0)
+		    mousetrap_goto("/course/switchrole.php" + to_query_params({id: id, switchrole: -1, returnurl: returnurl}));
+		else
+		    mousetrap_goto("/course/switchrole.php" + to_query_params({id: id, sesskey: session, switchrole: 0, returnurl: returnurl}));
                 return false;
             });
 
             // switch edit mode
             Mousetrap.bind('s e', function () {
-                var btn = $('.coursecontrols .editingbutton').click();
-                mousetrap_goto_abs(btn.attr('href'));
-                return false;
-            });
+		const id = get_query_params()['id'];
+		const session = M.cfg.sesskey;
+		const returnurl = encodeURI(window.location.pathname + window.location.search);
+		const editing = $('body.editing').length == 1;
+
+		const path = (id == null ? window.location.pathname : "/course/view.php")
+
+		mousetrap_goto(path + to_query_params({
+		    returnurl: returnurl,
+		    id: id,
+		    sesskey: session,
+		    edit: editing ? "off" : "on",
+		}));
+		return false;
+	    });
         }
 
     };
