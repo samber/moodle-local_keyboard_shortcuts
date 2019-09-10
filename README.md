@@ -27,6 +27,13 @@ Does **not** fire if you are inside of a `textarea`, `input`, or `select` to pre
 | s e | Teacher | Switch edition mode on/off |
 | s r | Admin | Switch role (and back) |
 
+### Overlays
+
+| Shortcut | Scope |  Description |
+|---|---|---|
+| ? | User | Display help |
+| / | User | Display search |
+
 ## Build
 
 ```

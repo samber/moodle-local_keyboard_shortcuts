@@ -23,5 +23,6 @@
 
 function local_keyboard_shortcuts_extend_navigation() {
     global $PAGE;
+    $PAGE->requires->css('/local/keyboard_shortcuts/styles/tomloprodModal.css');
     $PAGE->requires->js_call_amd('local_keyboard_shortcuts/shortcuts', 'init');
 }
