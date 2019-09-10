@@ -7,7 +7,7 @@ moodle-plugin-ci install --moodle /moodle --data /data --branch MOODLE_37_STABLE
 
 cd /moodle/local/keyboard_shortcuts/amd
 rm -rf build/
-grunt amd
+grunt amd --force
 
 rm -rf /plugin/amd/build/
 cp -r build/ /plugin/amd/build/
