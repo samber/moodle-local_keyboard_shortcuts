@@ -31,8 +31,8 @@ function req_is_ajax() {
 
 function local_keyboard_shortcuts_extend_navigation() {
     global $PAGE;
-    if (!req_is_ajax()) {
-        $PAGE->requires->css('/local/keyboard_shortcuts/styles/tomloprodModal.css');
+    if (!req_is_ajax() && $PAGE->requires->is_head_done()) {
+        //        $PAGE->requires->css('/local/keyboard_shortcuts/styles/tomloprodModal.css');
         $PAGE->requires->js_call_amd('local_keyboard_shortcuts/shortcuts', 'init');
     }
 }
