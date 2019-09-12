@@ -11,7 +11,7 @@ define(deps, function ($, Mousetrap, TomloprodModal) {
             .replace('?', '')
             .split('&')
             .map(function (params) {
-                return param.split('=')
+                return params.split('=')
             })
             .reduce(function (values, kv) {
                 kv[0] = kv[1];
@@ -186,7 +186,7 @@ define(deps, function ($, Mousetrap, TomloprodModal) {
             }).join('');
 
             $('body').append('<div class="tm-modal tm-effect tm-draggable" id="rtfmModal" style="max-width: 600px"><div class="tm-wrapper"><div class="tm-title"><span class="tm-XButton tm-closeButton"></span><p class="tm-title-text" style="margin-top: 1em;font-size: 35px;color: white;">Help</p></div><div class="tm-contentd"><table style="margin: 30px;width:140%;color: white;"><tr><th>Shortcut</th><th>Scope</th><th>Description</th></tr>' + strCmds + '</table></div></div></div>');
-            $('body').append('<div class="tm-modal tm-effect tm-draggable" id="searchModal"><div class="tm-wrapper"><span class="tm-XButton tm-closeButton" style="display:none;"></span><div class="tm-content" style="margin: 20px 0px;"><form style="text-align:center;margin:20px 0px;" id="searchContent"><input class="tm-emptyOnClose" placeholder="Search in content" required="" type="text" style="line-height: 30px;padding: 8px 15px;width: 80%;font-size: 17px;" focus></form><form style="text-align:center;margin:20px 0px;" id="searchAdmin"><input class="tm-emptyOnClose" placeholder="Search in admin" required="" type="text" style="line-height: 30px;padding: 8px 15px;width: 80%;font-size: 17px;"></form></div></div></div>');
+            $('body').append('<div class="tm-modal tm-effect tm-draggable" id="searchModal"><div class="tm-wrapper"><span class="tm-XButton tm-closeButton" style="display:none;"></span><div class="tm-content" style="margin: 20px 0px;"><form style="text-align:center;margin:20px 0px;" id="searchContent"><input class="tm-emptyOnClose" placeholder="Search in content" required="" type="text" style="line-height: 30px;padding: 8px 15px;width: 80%;font-size: 17px;" autofocus></form><form style="text-align:center;margin:20px 0px;" id="searchAdmin"><input class="tm-emptyOnClose" placeholder="Search in admin" required="" type="text" style="line-height: 30px;padding: 8px 15px;width: 80%;font-size: 17px;"></form></div></div></div>');
 
             TomloprodModal.start({
                 showMessages: false,
