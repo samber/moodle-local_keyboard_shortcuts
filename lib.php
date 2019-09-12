@@ -21,8 +21,18 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+function req_is_ajax() {
+    $reqwith = 'HTTP_X_REQUESTED_WITH';
+    if (isset($_SERVER[$reqwith]) && $_SERVER[$reqwith] == 'XMLHttpRequest') {
+        return true;
+    }
+    return false;
+}
+
 function local_keyboard_shortcuts_extend_navigation() {
     global $PAGE;
-    $PAGE->requires->css('/local/keyboard_shortcuts/styles/tomloprodModal.css');
-    $PAGE->requires->js_call_amd('local_keyboard_shortcuts/shortcuts', 'init');
+    if (!req_is_ajax()) {
+        $PAGE->requires->css('/local/keyboard_shortcuts/styles/tomloprodModal.css');
+        $PAGE->requires->js_call_amd('local_keyboard_shortcuts/shortcuts', 'init');
+    }
 }
