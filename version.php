@@ -22,12 +22,12 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2019090503;
+$plugin->version = 2019103104;
 $plugin->requires = 2015111600; // I don't know what i'm doing here ;)
 $plugin->cron = 0;
 $plugin->component = "local_keyboard_shortcuts";
 $plugin->maturity = MATURITY_ALPHA;
-$plugin->release = "v0.4.0";
+$plugin->release = "v0.5.0";
 
 $plugin->dependencies = [
 ];
